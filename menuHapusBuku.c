@@ -3,12 +3,13 @@
 #include <string.h>
 #define N 150
 
-void hapusBuku(char *filename);
+int menuHapusBuku(char *filename);
 
 char getOption(void);
 void removeBook(int id_delete, char *filename);
 int countData(char *filename);
 int checkID(int n);
+void ignoreInputBuffer();
 
 typedef struct dataBuku {
     unsigned int id;
@@ -22,12 +23,13 @@ typedef struct dataBuku {
 
 int main (){
 
-    hapusBuku("daftar_buku1.txt");
+    menuHapusBuku("daftar_buku1.txt");
+    printf("\n(Program selesai)\n");   
 
     return 0;
 }
 
-void hapusBuku(char *filename){
+int menuHapusBuku(char *filename){
     
     unsigned int id_input;
     char *ifp = filename;     // file data buku yang digunakan
@@ -35,7 +37,7 @@ void hapusBuku(char *filename){
     FILE *file = fopen(ifp, "r");
     if (file == NULL){
         printf("Error reading file...");
-        exit(EXIT_FAILURE);
+        return 1;
     }
 
     int jmlData = countData(ifp);
@@ -45,7 +47,7 @@ void hapusBuku(char *filename){
     file = fopen(ifp, "r");
     if (file == NULL){
         printf("Error reading file...");
-       exit(EXIT_FAILURE);
+        return 1;
     }
     char buffer[1052];
     for (int i = 0; i < jmlData+1; i++) {     // inisialisasi data file ke struct
@@ -55,26 +57,26 @@ void hapusBuku(char *filename){
     fclose(file);
 
     if(dataBuku[0].id == 0){
-        printf("Data kosong");
-        exit(EXIT_FAILURE);
+        printf("Data tidak tersedia");  // file data kosong
+        return 1;
     }
 
     char option, option2;
     int id_find;
     
     while (1) {
-        
-        printf("Apakah anda ingin menghapus buku? [y/n]: ");
         label_continue:
+        printf("Apakah anda ingin menghapus buku? [y/n]: ");
+        
         option = getOption();
         
         if (option == 'y') {
             printf("Masukkan ID buku yang ingin dihapus: ");
             scanf("%u", &id_input);     // input id buku yang dicari
-            getchar();
-            id_input = checkID(id_input);   //Jika id_input = -1, id tidak ditemukan
+            ignoreInputBuffer();
+            id_input = checkID(id_input);   //Jika id_input = 1, id tidak ditemukan
 
-            if(id_input != -1){
+            if(id_input != 1){
 
             // looping mencari id buku terkait
             for(int i = 0; i < jmlData; i++){
@@ -83,12 +85,12 @@ void hapusBuku(char *filename){
                     break;
                 }
                 if(i==jmlData-1){
-                    printf("(ID Buku tidak ditemukan)\n\n");        
+                    printf("(ID Buku tidak ditemukan)\n\n"); 
                     goto label_continue;    // id buku tidak ditemukan dan kembali ke input awal
                 }
             }
                     // cetak data buku terkait
-                    printf("\nID Buku       : %u\n", dataBuku[id_find].id);
+                    printf("\nID Buku      : %u\n", dataBuku[id_find].id);
                     printf("Judul Buku    : %s\n", dataBuku[id_find].judul);
                     printf("Penulis       : %s\n", dataBuku[id_find].penulis);
                     printf("Penerbit      : %s\n", dataBuku[id_find].penerbit);
@@ -107,20 +109,19 @@ void hapusBuku(char *filename){
                     }
                     if(option == 'n'){
                         printf("(Batal menghapus buku)\n\n");   // batal menghapus buku
-                         id_input = 0;
+                        id_input = 0;
                     }
                     else if(option == 'x'){
-                         printf("(Input tidak valid! Konfirmasi ulang)\n\n"); 
-                         goto label_confirm;    // konfirmasi ulang
+                        printf("(Input tidak valid! Konfirmasi ulang)\n\n"); 
+                        goto label_confirm;    // konfirmasi ulang
                     }
 
-            } else if(id_input == -1){
-                printf("(ID buku tidak ditemukan)\n");  // id tidak ditemukan ketika input char
-                goto label_continue;    // kembali ke input awal
+            } else if(id_input == 1){
+                printf("(ID buku tidak ditemukan, masukkan ID dengan benar!)\n\n");  // id tidak ditemukan ketika input char
+                id_input = 0;
             }
             
-        } else if (option == 'n') {
-            printf("(Program selesai)\n");      
+        } else if (option == 'n') {   
             break;                               // keluar dari looping awal
 
         } else if(option == 'x'){
@@ -154,7 +155,7 @@ char getOption(void){
 
 int checkID(int n){
     if((n>=1000) || (n<100)){
-        return -1;              // id tidak ditemukan
+        return 1;              // id tidak ditemukan
     }
 
     return n;
@@ -178,6 +179,13 @@ int countData(char *filename){
     fclose(file);
 
     return jmlData-1;
+}
+
+void ignoreInputBuffer(){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {   // membersihkan buffer input
+        continue;
+    }
 }
 
 void removeBook(int id_delete, char *filename){
