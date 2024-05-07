@@ -1,9 +1,10 @@
-    #include<stdio.h>
+#include<stdio.h>
 #include<stdlib.h>
 
 void clear(void);
 int userAdmin(void);
 int userOption(void);
+void ignoreInputBuffer();
 
 int loginMenu(char *);
 
@@ -24,7 +25,7 @@ int main(int argc, char *argv[]){
         return EXIT_FAILURE;
     }
 
-    int roleOption=0;
+    int roleOption=1;
 
 //    loginMenu(argv[2]);
 
@@ -53,8 +54,6 @@ int main(int argc, char *argv[]){
                     is_continue = 0;
                     break;    
                 default:
-                    printf("Invalid Input!");
-                    is_continue= 0;
                     break;
             }
             
@@ -69,6 +68,7 @@ int main(int argc, char *argv[]){
             switch (option){
                 case 1:
                     /* code tampilan isi buku*/
+                    printf("\n(1)");
                     break;
                 case 2:
                     /* code menampilkan daftar buku yang dipinjam*/
@@ -80,8 +80,6 @@ int main(int argc, char *argv[]){
                     is_continue = 0;
                     break;    
                 default:
-                    printf("Invalid Input!");
-                    is_continue= 0;
                     break;
             }
             
@@ -105,6 +103,7 @@ int userOption(){
     printf("\n================================\n");
     printf("Masukkan Pilihan :");
     scanf("%d", &input);
+    ignoreInputBuffer();
     return input;
 }
 
@@ -121,9 +120,17 @@ int userAdmin(){
     printf("\n================================\n");
     printf("Masukkan Pilihan :");
     scanf("%d", &input);
+    ignoreInputBuffer();
     return input;
 }
 
 void clear(void){
-    printf("\033[2J");
+    system("cls");
+}
+
+void ignoreInputBuffer(){
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {
+        continue;
+    }
 }
