@@ -1,0 +1,31 @@
+101 "Pemrograman Java Dasar" "Agus Kurniawan" "Andi" 1000 2012 11
+102 "Pendidikan Karakter" "Anies Baswedan" "Gramedia" 250 2012 30
+103 "Manajemen Keuangan" "R. Haryanto" "Erlangga" 400 2014 34
+104 "Psikologi Perkembangan" "Hurlock" "Pustaka Jaya" 350 2010 29
+105 "Teknik Presentasi yang Efektif" "Dian Indrayani" "Bhuana Ilmu Populer" 100 2020 11
+106 "Dasar-Dasar Jaringan Komputer" "William Stallings" "Pearson" 500 2016 40
+107 "Bahasa Inggris untuk Pemula" "John Doe" "Gramedia" 150 2011 18
+108 "Manajemen Sumber Daya Manusia" "Gary Dessler" "Salemba Empat" 450 2017 33
+109 "Ekonomi Makro" "Mankiw" "Erlangga" 380 2013 33
+110 "Sosiologi Pembangunan" "Nasikun" "Rajawali Press" 320 2009 27
+111 "Analisis Data untuk Bisnis" "Budi Santoso" "Gramedia" 320 2015 22
+112 "Pengantar Teknologi Informasi" "Dewi Kartika" "Erlangga" 280 2012 18
+113 "Penerapan Sistem Informasi Geografiss" "Haryanto Kusuma" "Andi" 400 2016 30
+114 "Manajemen Proyek Teknologi Informasi" "Putu Arya" "Bhuana Ilmu Populer" 250 2013 20
+115 "Sistem Pendukung Keputusan" "Sri Wahyuni" "Salemba Teknika" 300 2017 23
+116 "Pengantar Rekayasa Perangkat Lunak" "Suryanto Wibowo" "Penerbit Andi" 320 2018 28
+117 "Teknik Multimedia" "Tri Hartanto" "Media Komputindo" 280 2015 21
+118 "Pengantar Jaringan Komputer" "Yulianto Adi" "Graha Ilmu" 350 2019 27
+119 "Data Science for Business" "Foster Provost O'Reilly" "Media" 414 2013 20
+120 "Cybersecurity for Beginners" "Raef Meeuwisse" "Kogan Page" 320 2018 28
+121 "Mencari Jati Diri" "Andi Gunawan" "Mitra Wacana Media" 250 2015 18
+122 "Harapan Terakhir" "Firdaus Arifin" "Pustaka Alvabet" 280 2016 25
+123 "Melawan Arus" "Gita Putri" "A Samudra Biru" 330 2018 28
+124 "Terjebak Nostalgia" "Iwan Setyawan" "Bentang Pustaka" 290 2020 23
+125 "Pulang ke Rumah" "Kartika Putri" "Kompas Gramedia" 350 2011 26
+126 "Data Science for Business" "Foster Provost O'Reilly" "Media" 414 2013 20
+127 "Clean Code" "Robert C. Martin" "Prentice Hall" 464 2008 30
+128 "Design Patterns" "Erich Gamma" "Addison-Wesley" 212 2005 14
+129 "Agile Estimating and Planning" "Mike Cohn" "Prentice Hall" 368 2005 18
+130 "Python Crash Course" "Eric Matthes" "No Starch Press" 544 2015 10
+131 "Pengantar Rekayasa Perangkat Lunak" "Suryanto Wibowo" "Penerbit Andi" 320 2018 28

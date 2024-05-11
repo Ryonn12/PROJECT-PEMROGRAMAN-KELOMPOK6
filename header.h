@@ -6,6 +6,7 @@
 #include <ncurses.h>
 #else // Definisikan fungsi getch() untuk lingkungan Linux
 #include <ncurses.h>
+#include <unistd.h>
 #endif
         
 #include <stdio.h>
@@ -28,6 +29,9 @@ typedef struct dataBuku {
 
 void adminMenu(void);
 void userMenu(void);
+
+int menuDaftarBuku(char *filestream);
+void bookTable(int role);
 
 // Fungsi menu pilihan admin
 
@@ -58,3 +62,7 @@ int getOptionNumb(void);
 int getNumb(void);
 void ignoreInputBuffer();
 int checkNumb(int numb);
+
+//Fungsi operasi data
+int countData(char *filename);
+void loadData(dataBuku *dBuku, char *filestream, int dataSize);
