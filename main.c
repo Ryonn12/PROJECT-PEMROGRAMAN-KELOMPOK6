@@ -1,8 +1,5 @@
 #include"header.h"
 
-void adminMenu(void);
-void userMenu(void);
-
 int main(int argc, char *argv[]){
     clearScreen();
     if(argc != 2){
@@ -114,51 +111,4 @@ int main(int argc, char *argv[]){
     clearScreen();
 
     return 0;
-}
-
-void userMenu(){
-
-    clearScreen();
-    pathLoc("  Menu User>");
-    borderMenu();
-    movePos(63,8);
-    printf("M E N U  U S E R");
-   
-    movePos(59,12);
-    printf("(1) D A F T A R  B U K U");
-    movePos(59,14);
-    printf("(2) P I N J A M  B U K U");
-    movePos(59,16);
-    printf("(3) K E M B A L I K A N  B U K U");
-    movePos(59,18);
-    printf("(4) K E L U A R");
-    
-    menuTitle(0);
-    movePos(63,24);
-  
-}
-
-void adminMenu(){
-   
-    clearScreen();
-    pathLoc("  Menu Admin>");
-    borderMenu();
-    movePos(63,8);
-    printf("M E N U  A D M I N");
-   
-    movePos(59,12);
-    printf("(1) D A F T A R  B U K U");
-    movePos(59,14);
-    printf("(2) T A M B A H  B U K U");
-    movePos(59,16);
-    printf("(3) H A P U S  B U K U");
-    movePos(59,18);
-    printf("(4) U B A H  D A T A  B U K U");
-    movePos(59,20);
-    printf("(5) K E L U A R");
- 
- 
-    menuTitle(0);
-    movePos(63,24);
-  
 }
