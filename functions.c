@@ -138,6 +138,66 @@ void borderMenu(void){
         printf("-");
     }
 }
+void bookTable(int role){
+
+    clearScreen();
+    if(role == 0){
+        pathLoc("  Menu Admin\\Daftar Buku>");
+    } else if(role == 1){
+        pathLoc("  Menu User\\Daftar Buku>");
+    }
+    
+     //garis horizontal
+    for(int i=2; i<148;i++){   
+        movePos(i, 7);
+        printf("-");
+        movePos(i,9);
+        printf("-");
+        movePos(i,30);
+        printf("-");
+    }
+
+    //garis vertikal
+    for(int i=8; i<30; i++){    
+        movePos(0,i);
+        printf("|");
+        movePos(6,i);
+        printf("|");
+        movePos(15,i);
+        printf("|");
+        movePos(54,i);
+        printf("|");
+        movePos(82,i);
+        printf("|");
+        movePos(104,i);
+        printf("|");
+        movePos(121,i);
+        printf("|");
+        movePos(136,i);
+        printf("|");
+        movePos(150,i);
+        printf("|");
+    }
+
+    // nama kolom
+    int p=8;
+    movePos(3, p);          
+    printf("NO");
+    movePos(7, p);
+    printf("ID Buku");
+    movePos(27, p);
+    printf("Judul Buku");
+    movePos(61, p);
+    printf("Penulis");
+    movePos(90, p);
+    printf("Penerbit");
+    movePos(106, p);
+    printf("Jumlah Halaman");
+    movePos(123, p);
+    printf("Tahun Terbit");
+    movePos(138, p);
+    printf("Stok Buku");
+}
 void getEnterKey(){
     hidCurs(1);
     printf("   <Tekan enter untuk lanjut>");
@@ -289,4 +349,38 @@ char getOption(void){
         }
     }
     return option;
+}
+
+// Fungsi operasi data
+int countData(char *filename){
+    int jmlData=1;
+
+    char *ifp = filename;
+    FILE *file = fopen(ifp, "r");
+   
+    char ch;
+    while ((ch = fgetc(file)) != EOF) {      // menghitung jumlah data yang masuk dari file teks
+        if (ch == '\n') {
+            jmlData++;
+        }
+    }
+    fclose(file);
+
+    return jmlData-1;
+}
+void loadData(dataBuku *dBuku, char *filestream, int dataSize){
+    char *ifp = filestream;
+    FILE *file = fopen(ifp, "r");
+    if (file == NULL){
+        printf("   Error reading file...\n");
+        getchar();
+    }
+
+    char buffer[512];
+    for (int i = 0; i < dataSize; i++) {     // inisialisasi data file ke struct
+        fgets(buffer, 512, file);
+        sscanf(buffer, "%u \"%49[^\"]\" \"%29[^\"]\" \"%19[^\"]\" %u %u %u\n", &dBuku[i].id, dBuku[i].judul, dBuku[i].penulis, dBuku[i].penerbit, &dBuku[i].jmlHal, &dBuku[i].tahun, &dBuku[i].stok);
+    }
+    fclose(file);
+
 }
