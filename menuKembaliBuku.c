@@ -1,6 +1,7 @@
 #include"header.h"
 
 int menuKembaliBuku(char *fileData, char *filePinjam, char *userName){
+    clearScreen();
     dataBuku buku[N], bukuPinjam[M];
     char *name = userName;
     int jmlData = countData(fileData);
@@ -9,42 +10,42 @@ int menuKembaliBuku(char *fileData, char *filePinjam, char *userName){
     int ID, i;  // i = indeks
 
     while(1){
-        borderBukuPinjam(buku, bukuPinjam, filePinjam, fileData, name);
+        tabelBukuPinjam(buku, bukuPinjam, filePinjam, fileData, name);  // fungsi menampilakn buku yang sedang dipinjam
         printf("   Apakah anda ingin mengembalikan buku? [y/n] : ");
         option = getOption();
         if(option=='y'){
 
                 label_pinjam:
-                borderBukuPinjam(buku, bukuPinjam, filePinjam, fileData, name);
-                printf("\n   Masukkan ID buku yang akan dikembalikan : ");
+                tabelBukuPinjam(buku, bukuPinjam, filePinjam, fileData, name);
+                printf("   Masukkan ID buku yang akan dikembalikan : ");
                 scanf("%d", &ID);
                 ignoreInputBuffer();
 
 
-                ID = findBookID(bukuPinjam, filePinjam, jmlBukuPinjam, userName, ID);
-                i = findID(buku, ID, jmlData);
+                ID = findBookID(bukuPinjam, filePinjam, jmlBukuPinjam, userName, ID);   // fungsi untuk mencari id buku yang sedang dipinjam, return 0 jika buku tidak dalam pinjaman
+                i = findID(buku, ID, jmlData);  // fungsi mencari id dengan mengembalikan indeks pada array
                 
                 if(ID != 0){
                     label_confirm:
-                    borderBukuPinjam(buku, bukuPinjam, filePinjam, fileData, name);
+                    tabelBukuPinjam(buku, bukuPinjam, filePinjam, fileData, name);
              
-                    printf("\n   Apakah anda ingin mengembalikan buku dengan ID %d? [y/n] : ", ID);
+                    printf("   Apakah anda ingin mengembalikan buku dengan ID %d? [y/n] : ", ID);
                     option = getOption();
                     if(option == 'y'){
                         
-                        kembaliBuku(ID, filePinjam, userName);
+                        kembaliBuku(ID, filePinjam, userName);  // fungsi untuk mengembalikan buku
                         buku[i].stok++;
-                        updateData(buku, fileData, jmlData, ID);
+                        updateData(buku, fileData, jmlData, ID);            //update data terhadap file data peminjaman
                         loadBukuPinjam(bukuPinjam, filePinjam, jmlBukuPinjam);
                         printf("\n\n   (Pengembalian buku berhasil)\n\n");
                         getEnterKey();
-                        borderBukuPinjam(buku, bukuPinjam, filePinjam, fileData, name);
+                        tabelBukuPinjam(buku, bukuPinjam, filePinjam, fileData, name);
 
-                        printf("\n   Ingin mengembalikan buku lagi? [y/n] : ");
+                        printf("   Ingin mengembalikan buku lagi? [y/n] : ");       // pertanyaan untuk memnjam buku lagi
                         option = getOption();
 
                         if (option == 'y') {
-                            goto label_pinjam;
+                            goto label_pinjam;      // kembali ke label_pinjam
                         } else if(option == 'n'){
                             break;
                         } else{
@@ -62,7 +63,7 @@ int menuKembaliBuku(char *fileData, char *filePinjam, char *userName){
                     }
 
                 } else if(ID==0){
-                    printf("\n\n   (Anda tidak meminjam buku dengan ID tersebut)\n\n");
+                    printf("\n\n   (Anda tidak meminjam buku dengan ID tersebut)\n\n"); //kondisi ketika buku tidak dalam pinjaman
                     getEnterKey();
                 } 
             
