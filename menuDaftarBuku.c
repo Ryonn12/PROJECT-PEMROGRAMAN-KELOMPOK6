@@ -38,7 +38,7 @@ int menuDaftarBuku(char *filestream){
  
     while(1){
         hidCurs(1);
-        bookTable(1 );
+        bookTable(1);
         movePos(65,5);
         printf("< P A G E  %d >", page);
 

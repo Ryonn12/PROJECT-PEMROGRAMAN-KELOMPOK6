@@ -53,6 +53,7 @@ void greetingText(char *userName);
 void loadingScreen(void);
 void delay(float sec);  
 void borderBukuPinjam(dataBuku *buku, dataBuku *bukuPinjam, char *filestream1, char *filestream2, char *userName);
+void bookTable(int role);
 
 //Fungsi Input
 char getOption(void);
@@ -60,8 +61,6 @@ int getOptionNumb(void);
 int getNumb(void);
 void ignoreInputBuffer();
 int checkNumb(int numb);
-<<<<<<< Updated upstream
-=======
 
 //Fungsi operasi data
 int countData(char *filename);
@@ -86,4 +85,4 @@ int kembaliBuku(int id_delete, char *filename, char *userNameDel);
 int findBookID(dataBuku *loadBukuPinjam, char*filestream, int dataSize, char*userName, int ID);
 int pinjamBuku(dataBuku *daftarBuku, dataBuku *bPinjam, int i, char *username, char *userFileStream);
 void registerUser(void);
->>>>>>> Stashed changes
+
