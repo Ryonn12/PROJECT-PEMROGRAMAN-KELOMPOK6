@@ -12,8 +12,10 @@ int main(int argc, char *argv[]){
     
     char file1[20] = "daftar_buku.txt";
     char file2[15] = "userBook.txt";
+     char file3[] = "recordBook.txt";
     char *fileData = file1;
     char *filePinjam = file2;
+    char *fileRecord = file3;
 
     char userName[20] = "user1";
     char *name = userName;
@@ -47,7 +49,7 @@ int main(int argc, char *argv[]){
             switch (option){
                 case 1:
                     /* fungsi menampilkan buku */
-                    menuDaftarBuku(fileData);
+                    menuDaftarBuku(fileData, filePinjam, fileRecord, name, roleOption);
                   
                     break;
                 // case 2:
@@ -84,7 +86,7 @@ int main(int argc, char *argv[]){
             switch (option){
                 case 1:
                     /* fungsi tampilan isi buku*/
-                   
+                    menuDaftarBuku(fileData, filePinjam, fileRecord, name, roleOption);
                     break;
                 case 2:
                     /* fungsi menampilkan daftar buku yang dipinjam*/
@@ -106,6 +108,13 @@ int main(int argc, char *argv[]){
     
     movePos(66,26);
     hidCurs(1);
+    printf("<End Program>\n");
+    getchar();
+    hidCurs(0);
+    clearScreen();
+
+    return 0;
+    Curs(1);
     printf("<End Program>\n");
     getchar();
     hidCurs(0);

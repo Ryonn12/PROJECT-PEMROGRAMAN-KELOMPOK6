@@ -254,6 +254,48 @@ void delay(float sec) {
     #endif
 #endif
 }
+void borderBukuPinjam(dataBuku *buku, dataBuku *bukuPinjam, char *filestream1, char *filestream2, char *userName){
+    int jmlBukuPinjam = countData(filestream1);
+    int jmlData = countData(filestream2);
+    loadBukuPinjam(bukuPinjam, filestream1, jmlBukuPinjam);
+    loadData(buku, filestream2, jmlData);
+
+    clearScreen();
+    pathLoc("  Menu User\\Kembalikan Buku");
+    // menuTitle(1);
+    printBukuPinjam(buku, bukuPinjam, filestream1, filestream2, userName);
+
+    movePos(3,9); printf("NO");
+    movePos(7,9); printf("ID Buku");
+    movePos(27,9); printf("Judul Buku");
+    movePos(66,9); printf("Penulis");
+    movePos(95,9); printf("Penerbit");
+    movePos(117,9); printf("Jumlah Halaman");
+    movePos(134,9); printf("Tahun Terbit");
+
+
+    for(int i=2; i<147; i++){
+        movePos(i,8); printf("-");
+        movePos(i,10); printf("-");
+        movePos(i,8); printf("-");
+        movePos(i,16); printf("-");
+    }
+
+    for(int i=9; i<16; i++){
+        movePos(0,i); printf("|");
+        movePos(6,i); printf("|");
+        movePos(14,i); printf("|");
+        movePos(55,i); printf("|");
+        movePos(85,i); printf("|");
+        movePos(115,i); printf("|");
+        movePos(55,i); printf("|");
+        movePos(55,i); printf("|");
+        movePos(132,i); printf("|");
+        movePos(147,i); printf("|");
+    }
+
+    movePos(0,18);
+}
 
 // Fungsi input
 void ignoreInputBuffer(){
@@ -383,4 +425,130 @@ void loadData(dataBuku *dBuku, char *filestream, int dataSize){
     }
     fclose(file);
 
+
 }
+void loadBukuPinjam(dataBuku *dBuku, char *filestream, int dataSize){
+    char *ifp = filestream;
+    FILE *file = fopen(ifp, "r");
+    if (file == NULL){
+        printf("   Error reading file...\n");
+        getchar();
+    }
+
+    char buffer[512];
+    for (int i = 0; i < dataSize; i++) {     // inisialisasi data file ke struct
+        fgets(buffer, 512, file);
+        sscanf(buffer, "\"%20[^\"]\" %u \"%49[^\"]\" \"%29[^\"]\" \"%19[^\"]\" %u %u \n", &dBuku[i].userName, &dBuku[i].id, dBuku[i].judul, dBuku[i].penulis, dBuku[i].penerbit, &dBuku[i].jmlHal, &dBuku[i].tahun);
+    }
+    fclose(file);
+
+}
+void updateData(dataBuku *dBuku, char *filestream, int dataSize, int id){
+    char *ifp = filestream;
+
+    FILE *file = fopen(ifp, "w"); 
+        if(!file){
+            perror("   (Gagal melakukan update data)\n\n)");
+            printf("   <Tekan Enter untuk lanjut>");
+            getchar();
+        }
+
+        // update data dari struct ke dalam file
+        for(int i=0; i<dataSize; i++){
+                fprintf(file, "%u \"%s\" \"%s\" \"%s\" %u %u %u\n", dBuku[i].id, dBuku[i].judul, dBuku[i].penulis, dBuku[i].penerbit, dBuku[i].jmlHal, dBuku[i].tahun, dBuku[i].stok);
+        }
+        fclose(file);
+        
+}
+void printData(dataBuku *dBuku, char *filestream, int dataSize){
+
+    for(int i=0; i<dataSize; i++){
+        printf("%u   %-40s %-30s %-25s %u   %u   %u\n", dBuku[i].id, dBuku[i].judul, dBuku[i].penulis, dBuku[i].penerbit, dBuku[i].jmlHal, dBuku[i].tahun, dBuku[i].stok);
+    }
+}
+void printBukuPinjam(dataBuku *buku, dataBuku *bukuPinjam, char *filePinjam, char *fileData, char *userName) {
+    char tempFile[] = "tempFile.txt";
+    char *tfp = tempFile;
+    char *name = userName;
+     int jmlBukuPinjam = countData(filePinjam);
+
+    movePos(54, 6);
+    printf("D A F T A R  B U K U  P I N J A M");
+
+    movePos(0, 11);
+    int numb=1;
+    for(int i = 0; i < jmlBukuPinjam; i++){
+        if(strcmp(bukuPinjam[i].userName, name) == 0){
+            textStyle(0);
+            if(numb%2==0){
+                textStyle(2);
+            }
+            printf("  0%-4u %-6u %-40s %-30s%-35s %-15u %u\n", numb, bukuPinjam[i].id, bukuPinjam[i].judul, bukuPinjam[i].penulis, bukuPinjam[i].penerbit, bukuPinjam[i].jmlHal, bukuPinjam[i].tahun);
+            numb++;
+        }
+    }
+    textStyle(0);
+}
+int checkPrimeKey(dataBuku *dBuku, int id, int dataSize){
+    for(int i=0; i<dataSize; i++){             
+        if(id == dBuku[i].id){
+            return 1;               // return id ketika id buku ditemukan
+        }
+    }
+    return 0;       //return 0 ketika id tidak ditemukan 
+}
+int checkID(int n){
+    if((n>=1000) || (n<100)){
+        return 1;              // return 1 ketika id tidak ditemukan
+    }                          // hanya berlaku pada module menuHapusBuku
+
+    return n;
+}
+int findID(dataBuku *dbuku, int id_input, int dataSize){
+    int id_find;
+    for(int i = 0; i < dataSize; i++){
+        if((unsigned int)id_input == dbuku[i].id){
+        id_find = i;    // id buku ditemukan dan mengembalikan indeks buku
+        return id_find;
+        }
+    }
+    return -1;  // return -1 ketika id tidak ditemukan
+}
+int checkBookKey(dataBuku *dBuku, int id, int dataSize){
+    for(int i=0; i<dataSize; i++){             
+        if(id == dBuku[i].id){
+            return 1;               // return id ketika id buku ditemukan
+        }
+    }
+    return 0;       //return 0 ketika id tidak ditemukan 
+}
+int findBookID(dataBuku *bukuPinjam, char*filestream, int dataSize, char*userName, int ID){
+    
+    for(int i=0; i<dataSize; i++){ 
+        if(strcmp(bukuPinjam[i].userName, userName)==0){
+                if(ID==bukuPinjam[i].id){
+                    return ID;      // return id jika sama
+                }
+        }
+        
+        
+    }
+    return 0;       //return 0 ketika id tidak ditemukan 
+}
+int countBukuPinjam(char *filename, char *userName) {
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        printf("Gagal membuka file.\n");
+        return -1;
+    }
+    char line[512]; 
+    int count = 0;
+    while (fgets(line, sizeof(line), file)) {
+        if (strstr(line, userName) != NULL) {
+            count++;
+        }
+    }
+    fclose(file);
+    return count;
+}
+
