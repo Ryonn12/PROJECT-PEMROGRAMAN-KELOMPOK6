@@ -1,54 +1,69 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include"header.h"
 
-void clear(void);
-int userAdmin(void);
-int userOption(void);
-void ignoreInputBuffer();
-
-int loginMenu(char *);
-
-// fungsi user
-void daftarBuku();
-void pinjamBuku();
-void kembaliBuku();
-
-// fungsi admin
-void daftarBuku();
-void daftarBukuPinjaman();
-void tambahBuku();
-void hapusBuku(); 
+void adminMenu(void);
+void userMenu(void);
 
 int main(int argc, char *argv[]){
+    clearScreen();
     if(argc != 2){
-        printf("Input Argumen!\nArgumen Input : admin/user\n ");
+        printf("\nArgument inputs are required!\n\nEXAMPLE :\nArgument \t:.\\program \"role\" \n ");
+        printf("\nrole \t\t: admin/user\n\n");
+        getEnterKey();
+
         return EXIT_FAILURE;
     }
 
-    int roleOption=1;
+    char file1[] = "daftar_buku.txt";
+    char file2[] = "userBook.txt";
+    char file3[] = "recordBook.txt";
+    char *fileData = file1;
+    char *filePinjam = file2;
+    char *fileRecord = file3;
 
-//    loginMenu(argv[2]);
+    int roleOption;
+    if (strcmp(argv[1], "admin") == 0) {
+        roleOption = 0; 
+    } else if (strcmp(argv[1], "user") == 0) {
+        roleOption = 1;
+    } else {
+        printf("Tipe akun tidak valid!\n");
+        getEnterKey();
+        return EXIT_FAILURE;
+    }
+
+        char userName[20];
+        strcpy(userName, loginMenu(argv[1]));
+        char *name = userName;
+
+        loadingScreen();
 
     enum role{ADMIN, USER};
 
+    int option;
+    int is_continue;
     if (roleOption == ADMIN){
-        int option;
-        int is_continue;
         is_continue=1;
         while(is_continue){
-            option = userAdmin();
+            adminMenu();
+            greetingText(name);
+            printf("Masukkan Pilihan : ");
+            option = getOptionNumb();
             switch (option){
                 case 1:
-                    /* code tampilan isi buku*/
+                    /* fungsi menampilkan buku */      
+                    menuDaftarBuku(fileData, filePinjam, fileRecord, name, roleOption);
                     break;
                 case 2:
-                    /* code menampilkan daftar buku yang sedang dipinjam oleh user*/
+                    /* fungsi untuk menambahkan data buku baru ke dalam daftar */
+                    menuTambahBuku(fileData);
                     break;
                 case 3:
-                    /* code untuk menambahkan data buku baru ke dalam daftar */
+                    /* fungsi untuk menghapus buku dari daftar*/;
+                    menuHapusBuku(fileData);
                     break;
                 case 4:
-                    /* code untuk menghapus buku dari daftar*/;
+                    /* Fungsi untuk mengedit buku*/
+                    menuEditBuku(fileData);
                     break;
                 case 5:
                     is_continue = 0;
@@ -60,21 +75,24 @@ int main(int argc, char *argv[]){
         }
 
     } else if(roleOption == USER){
-        int option;
-        int is_continue;
         is_continue=1;
         while(is_continue){
-            option = userOption();
+            userMenu();
+            greetingText(name);
+            printf("Masukkan Pilihan : ");
+            option = getOptionNumb();
             switch (option){
                 case 1:
-                    /* code tampilan isi buku*/
-                    printf("\n(1)");
+                    /* fungsi tampilan isi buku*/
+                    menuDaftarBuku(fileData, filePinjam, fileRecord, name, roleOption);
                     break;
                 case 2:
-                    /* code menampilkan daftar buku yang dipinjam*/
+                    /* fungsi menampilkan daftar buku yang dipinjam*/
+                    menuPinjamBuku(fileData, name, filePinjam, fileRecord);
                     break;
                 case 3:
-                    /* code pinjam dan kembalikan buku */
+                    /* fungsi mengembalikan buku */
+                    menuKembaliBuku(fileData, filePinjam, name);
                     break;
                 case 4:
                     is_continue = 0;
@@ -86,51 +104,23 @@ int main(int argc, char *argv[]){
         }
     }
     
-    printf("\nEnd Program\n");
+<<<<<<< Updated upstream
+    movePos(66,26);
+    hidCurs(1);
+=======
+    Curs(1);
+>>>>>>> Stashed changes
+    printf("<End Program>\n");
+    getchar();
+    hidCurs(0);
+    clearScreen();
 
     return 0;
-}
+    Curs(1);
+    printf("<End Program>\n");
+    getchar();
+    hidCurs(0);
+    clearScreen();
 
-int userOption(){
-    int input;
-    clear();
-    printf("User Option\n");
-    printf("================================\n");
-    printf("(1) Tampilkan Daftar Buku\n");
-    printf("(2) Tampilkan Daftar Buku yang Dipinjam\n");
-    printf("(3) Pinjam dan Kembalikan Buku\n");
-    printf("(4) Keluar dari Aplikasi\n");
-    printf("\n================================\n");
-    printf("Masukkan Pilihan :");
-    scanf("%d", &input);
-    ignoreInputBuffer();
-    return input;
-}
-
-int userAdmin(){
-    int input;
-    clear();
-    printf("User Admin\n");
-    printf("================================\n");
-    printf("(1) Tampilkan Daftar Buku\n");
-    printf("(2) Tampilkan Buku yang Dipinjam User\n");
-    printf("(3) Tambahkan Buku\n");
-    printf("(4) Hapus Buku\n");
-    printf("(5) Keluar dari Aplikasi\n");
-    printf("\n================================\n");
-    printf("Masukkan Pilihan :");
-    scanf("%d", &input);
-    ignoreInputBuffer();
-    return input;
-}
-
-void clear(void){
-    system("cls");
-}
-
-void ignoreInputBuffer(){
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF) {
-        continue;
-    }
+    return 0;
 }
