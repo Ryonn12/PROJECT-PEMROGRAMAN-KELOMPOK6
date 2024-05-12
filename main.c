@@ -1,7 +1,10 @@
 #include"header.h"
 
+void adminMenu(void);
+void userMenu(void);
+
 int main(int argc, char *argv[]){
-    clearScreen();  
+    clearScreen();
     if(argc != 2){
         printf("\nArgument inputs are required!\n\nEXAMPLE :\nArgument \t:.\\program \"role\" \n ");
         printf("\nrole \t\t: admin/user\n\n");
@@ -9,16 +12,13 @@ int main(int argc, char *argv[]){
 
         return EXIT_FAILURE;
     }
-    
-    char file1[20] = "daftar_buku.txt";
-    char file2[15] = "userBook.txt";
-     char file3[] = "recordBook.txt";
+
+    char file1[] = "daftar_buku.txt";
+    char file2[] = "userBook.txt";
+    char file3[] = "recordBook.txt";
     char *fileData = file1;
     char *filePinjam = file2;
     char *fileRecord = file3;
-
-    char userName[20] = "user1";
-    char *name = userName;
 
     int roleOption;
     if (strcmp(argv[1], "admin") == 0) {
@@ -31,9 +31,11 @@ int main(int argc, char *argv[]){
         return EXIT_FAILURE;
     }
 
-    
+        char userName[20];
+        strcpy(userName, loginMenu(argv[1]));
+        char *name = userName;
 
-    loadingScreen();
+        loadingScreen();
 
     enum role{ADMIN, USER};
 
@@ -48,24 +50,20 @@ int main(int argc, char *argv[]){
             option = getOptionNumb();
             switch (option){
                 case 1:
-                    /* fungsi menampilkan buku */
+                    /* fungsi menampilkan buku */      
                     menuDaftarBuku(fileData, filePinjam, fileRecord, name, roleOption);
-                  
-                    break;
-                // case 2:
-                    /* fungsi menampilkan buku yang sedang dipinjam oleh user*/
-                    
                     break;
                 case 2:
                     /* fungsi untuk menambahkan data buku baru ke dalam daftar */
-                  
+                    menuTambahBuku(fileData);
                     break;
                 case 3:
                     /* fungsi untuk menghapus buku dari daftar*/;
-                  
+                    menuHapusBuku(fileData);
                     break;
                 case 4:
-                    
+                    /* Fungsi untuk mengedit buku*/
+                    menuEditBuku(fileData);
                     break;
                 case 5:
                     is_continue = 0;
@@ -90,11 +88,11 @@ int main(int argc, char *argv[]){
                     break;
                 case 2:
                     /* fungsi menampilkan daftar buku yang dipinjam*/
-                    
+                    menuPinjamBuku(fileData, name, filePinjam, fileRecord);
                     break;
                 case 3:
                     /* fungsi mengembalikan buku */
-                   
+                    menuKembaliBuku(fileData, filePinjam, name);
                     break;
                 case 4:
                     is_continue = 0;
