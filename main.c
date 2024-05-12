@@ -103,8 +103,12 @@ int main(int argc, char *argv[]){
         }
     }
     
+<<<<<<< Updated upstream
     movePos(66,26);
     hidCurs(1);
+=======
+    Curs(1);
+>>>>>>> Stashed changes
     printf("<End Program>\n");
     getchar();
     hidCurs(0);

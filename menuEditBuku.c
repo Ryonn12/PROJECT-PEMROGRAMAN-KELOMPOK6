@@ -15,7 +15,10 @@ int menuEditBuku(char *filestream){
 
     loadData(buku, ifp, jmlData);
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     char option;
     int id_find=1, id_input;
     while(1){
