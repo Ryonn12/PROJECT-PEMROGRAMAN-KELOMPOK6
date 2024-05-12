@@ -50,6 +50,7 @@ int main(int argc, char *argv[]){
             option = getOptionNumb();
             switch (option){
                 case 1:
+                    /* fungsi menampilkan buku */      
                     menuDaftarBuku(fileData, filePinjam, fileRecord, name, roleOption);
                     break;
                 case 2:
@@ -105,6 +106,13 @@ int main(int argc, char *argv[]){
     
     movePos(66,26);
     hidCurs(1);
+    printf("<End Program>\n");
+    getchar();
+    hidCurs(0);
+    clearScreen();
+
+    return 0;
+    Curs(1);
     printf("<End Program>\n");
     getchar();
     hidCurs(0);

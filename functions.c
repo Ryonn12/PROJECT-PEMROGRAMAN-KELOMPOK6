@@ -528,6 +528,48 @@ void borderBukuPinjam(dataBuku *buku, dataBuku *bukuPinjam, char *filestream1, c
 
     movePos(0,18);
 }
+void borderBukuPinjam(dataBuku *buku, dataBuku *bukuPinjam, char *filestream1, char *filestream2, char *userName){
+    int jmlBukuPinjam = countData(filestream1);
+    int jmlData = countData(filestream2);
+    loadBukuPinjam(bukuPinjam, filestream1, jmlBukuPinjam);
+    loadData(buku, filestream2, jmlData);
+
+    clearScreen();
+    pathLoc("  Menu User\\Kembalikan Buku");
+    // menuTitle(1);
+    printBukuPinjam(buku, bukuPinjam, filestream1, filestream2, userName);
+
+    movePos(3,9); printf("NO");
+    movePos(7,9); printf("ID Buku");
+    movePos(27,9); printf("Judul Buku");
+    movePos(66,9); printf("Penulis");
+    movePos(95,9); printf("Penerbit");
+    movePos(117,9); printf("Jumlah Halaman");
+    movePos(134,9); printf("Tahun Terbit");
+
+
+    for(int i=2; i<147; i++){
+        movePos(i,8); printf("-");
+        movePos(i,10); printf("-");
+        movePos(i,8); printf("-");
+        movePos(i,16); printf("-");
+    }
+
+    for(int i=9; i<16; i++){
+        movePos(0,i); printf("|");
+        movePos(6,i); printf("|");
+        movePos(14,i); printf("|");
+        movePos(55,i); printf("|");
+        movePos(85,i); printf("|");
+        movePos(115,i); printf("|");
+        movePos(55,i); printf("|");
+        movePos(55,i); printf("|");
+        movePos(132,i); printf("|");
+        movePos(147,i); printf("|");
+    }
+
+    movePos(0,18);
+}
 
 
 // Fungsi input
