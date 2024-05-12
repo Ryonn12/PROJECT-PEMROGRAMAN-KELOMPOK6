@@ -74,6 +74,7 @@ void greetingText(char *userName);
 void loadingScreen(void);
 void delay(float sec);  
 
+
 //Fungsi Input
 char getOption(void);
 int getOptionNumb(void);

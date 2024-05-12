@@ -198,6 +198,12 @@ void daftarBukuPinjam(dataBuku *buku, char *fileStream){
             jmlPage++;
         }
     }
+ 
+    while(1){
+        hidCurs(1);
+        bookTable(1);
+        movePos(65,5);
+        printf("< P A G E  %d >", page);
 
     if(jmlData!=0){
         while(1){

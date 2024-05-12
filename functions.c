@@ -570,6 +570,46 @@ void borderBukuPinjam(dataBuku *buku, dataBuku *bukuPinjam, char *filestream1, c
 
     movePos(0,18);
 }
+void bookTable(int role){
+    clearScreen();
+    if(role == 0){
+        pathLoc("  Menu Admin\\Daftar Buku>");
+    } else if(role == 1){
+        pathLoc("  Menu User\\Daftar Buku>");
+    }
+    
+     //garis horizontal
+    for(int i=2; i<148;i++){   
+        movePos(i, 7);
+        printf("-");
+        movePos(i,9);
+        printf("-");
+        movePos(i,30);
+        printf("-");
+    }
+
+    //garis vertikal
+    for(int i=8; i<30; i++){    
+        movePos(0,i);
+        printf("|");
+        movePos(6,i);
+        printf("|");
+        movePos(15,i);
+        printf("|");
+        movePos(54,i);
+        printf("|");
+        movePos(82,i);
+        printf("|");
+        movePos(104,i);
+        printf("|");
+        movePos(121,i);
+        printf("|");
+        movePos(136,i);
+        printf("|");
+        movePos(150,i);
+        printf("|");
+    }
+}
 
 
 // Fungsi input
@@ -703,6 +743,12 @@ char getOption(void){
         }
     }
     return option;
+<<<<<<< HEAD
+}
+=======
+>>>>>>> e2463c45d27d71ef6e91f1e16c674ffc69c874b8
+
+
 
 // Fungsi operasi data
 int countData(char *filename){
