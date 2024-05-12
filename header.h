@@ -8,11 +8,10 @@
 #include <ncurses.h>
 #include <unistd.h>
 #endif
-        
+      
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include<conio.h>
 #define N 150
 #define M 5
 
@@ -32,10 +31,10 @@ void userMenu(void);
 
 int menuDaftarBuku(char *filestream);
 void bookTable(int role);
-int menuHapusBuku(char *filename);
+
 
 // Fungsi menu pilihan admin
-
+int menuHapusBuku(char *filename);
 
 //Fungsi menu pilihan user
 int menuPinjamBuku(char *filestream, char *userName, char *filePinjam);
