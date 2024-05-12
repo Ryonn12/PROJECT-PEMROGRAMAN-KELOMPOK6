@@ -1,7 +1,7 @@
 #include"header.h"
 
 int main(int argc, char *argv[]){
-    clearScreen();
+    clearScreen();  
     if(argc != 2){
         printf("\nArgument inputs are required!\n\nEXAMPLE :\nArgument \t:.\\program \"role\" \n ");
         printf("\nrole \t\t: admin/user\n\n");
@@ -47,6 +47,7 @@ int main(int argc, char *argv[]){
             switch (option){
                 case 1:
                     /* fungsi menampilkan buku */
+                    menuDaftarBuku(fileData);
                   
                     break;
                 // case 2:
