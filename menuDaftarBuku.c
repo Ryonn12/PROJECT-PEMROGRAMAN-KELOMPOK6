@@ -42,10 +42,9 @@ void daftarBuku(dataBuku *buku, char *fileStream, int role){
     clearScreen();
     int jmlData = 0;
     int jmlBuku = 0;
-
     char *ifp = fileStream;
     jmlData = countData(ifp);       // menghitung data pada file
-
+    
     if(jmlData>N){
         jmlData = N;
     }
@@ -198,12 +197,6 @@ void daftarBukuPinjam(dataBuku *buku, char *fileStream){
             jmlPage++;
         }
     }
- 
-    while(1){
-        hidCurs(1);
-        bookTable(1);
-        movePos(65,5);
-        printf("< P A G E  %d >", page);
 
     if(jmlData!=0){
         while(1){
