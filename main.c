@@ -60,6 +60,7 @@ int main(int argc, char *argv[]){
                     break;
                 case 3:
                     /* fungsi untuk menghapus buku dari daftar*/;
+                    int menuHapusBuku(fileData);
                   
                     break;
                 case 4:
