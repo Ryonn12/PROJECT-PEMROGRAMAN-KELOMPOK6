@@ -100,27 +100,15 @@ int main(int argc, char *argv[]){
                 default:
                     break;
             }
-            
         }
     }
     
-<<<<<<< Updated upstream
     movePos(66,26);
     hidCurs(1);
-=======
-    Curs(1);
->>>>>>> Stashed changes
-    printf("<End Program>\n");
-    getchar();
-    hidCurs(0);
-    clearScreen();
-
-    return 0;
     Curs(1);
     printf("<End Program>\n");
     getchar();
     hidCurs(0);
     clearScreen();
-
     return 0;
 }
