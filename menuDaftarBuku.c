@@ -4,7 +4,6 @@ int menuDaftarBuku(char *filestream){
     clearScreen();
     int jmlData = 0;
     int jmlBuku = 0;
-
     char *ifp = filestream;
     jmlData = countData(ifp);
 
