@@ -105,7 +105,6 @@ int main(int argc, char *argv[]){
     
     movePos(66,26);
     hidCurs(1);
-    Curs(1);
     printf("<End Program>\n");
     getchar();
     hidCurs(0);
